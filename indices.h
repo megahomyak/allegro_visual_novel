@@ -1,0 +1,10 @@
+#define FIRST_ACTION TEST_ACTION
+
+
+enum Indices {
+	MENU_LOCATION,
+	TEST_LOCATION_1,
+	TEST_LOCATION_2,
+	TEST_LOCATION_3,
+	TEST_ACTION,  // Actions start here
+};

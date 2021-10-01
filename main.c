@@ -56,6 +56,12 @@ const char default_font_path[] = "data/fonts/jetbrains_mono.ttf";
 int main() {  // Not (void) because conflicting with allegro
 	check_init(al_init(), "allegro");
 
+	ALLEGRO_DISPLAY *display = make_new_allegro_display(DEFAULT_DISPLAY_WIDTH, DEFAULT_DISPLAY_HEIGHT, "Моя игра");
+	check_init(display, "display");
+	ALLEGRO_EVENT_QUEUE *event_queue = al_create_event_queue();
+	check_init(event_queue, "event queue");
+	check_init(al_init_image_addon(), "image addon");
+
     bool mouse_or_touch_input_was_installed_successfully = false;
     if (al_install_mouse()) {
         mouse_or_touch_input_was_installed_successfully = true;
@@ -69,12 +75,6 @@ int main() {  // Not (void) because conflicting with allegro
         lightweight_print("Unable to initialize mouse or touch input!");
         exit(1);
     }
-
-	ALLEGRO_DISPLAY *display = make_new_allegro_display(DEFAULT_DISPLAY_WIDTH, DEFAULT_DISPLAY_HEIGHT, "Моя игра");
-	check_init(display, "display");
-	ALLEGRO_EVENT_QUEUE *event_queue = al_create_event_queue();
-	check_init(event_queue, "event queue");
-	check_init(al_init_image_addon(), "image addon");
 
 	al_register_event_source(event_queue, al_get_display_event_source(display));
 

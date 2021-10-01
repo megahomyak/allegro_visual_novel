@@ -1,3 +1,5 @@
+#include <allegro5/allegro_ttf.h>
+
 #include "rendering.c"
 
 
@@ -68,4 +70,21 @@ void change_location(struct GameContext *game_context, uint_least8_t button_inde
 	} else {  // This is an action
 		action_handlers[index - FIRST_ACTION](game_context);
 	}
+}
+
+
+ALLEGRO_FONT * load_ttf_font(const char *font_path, unsigned int font_size) {
+	// You need to call al_init_ttf_addon() before calling this
+	ALLEGRO_FONT *font = al_load_ttf_font(
+		font_path,
+		font_size,
+		/*flags: int=*/0
+	);
+	if (!font) {
+		lightweight_print("Font ");
+		lightweight_print(font_path);
+		lightweight_print(" wasn't found!");
+		exit(1);
+	}
+	return font;
 }

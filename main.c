@@ -94,12 +94,8 @@ int main() {  // Not (void) because conflicting with allegro
 	game_context.colors.background = al_map_rgb(0, 0, 0);  // Black
 	game_context.colors.button = al_map_rgb(48, 48, 48);  // Dark gray
 	game_context.colors.text = al_map_rgb(255, 255, 255);  // White
-	unsigned int dpi = al_get_monitor_dpi(1);
-	if (dpi == 0) {
-		dpi = 1;
-	}
-	game_context.indents.button_text = dpi * DEFAULT_TEXT_INDENT;
-	game_context.indents.buttons_and_image = dpi * DEFAULT_BUTTON_INDENT;
+	game_context.indents.button_text = DEFAULT_TEXT_INDENT;
+	game_context.indents.buttons_and_image = DEFAULT_BUTTON_INDENT;
 
 	check_init(al_init_ttf_addon(), "ttf addon");
 	ALLEGRO_FONT *font = load_ttf_font(default_font_path, DEFAULT_FONT_SIZE);

@@ -1,5 +1,7 @@
 #include <allegro5/allegro_ttf.h>
 
+#include <stdio.h>
+
 #include "rendering.c"
 
 

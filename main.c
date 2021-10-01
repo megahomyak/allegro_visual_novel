@@ -121,6 +121,8 @@ int main(int argc, char **argv) {  // Not (void) because conflicting with allegr
 	}
 	event_loop_end:
 	al_destroy_display(display);
+	al_shutdown_ttf_addon();
+	al_shutdown_image_addon();
 	al_destroy_font(font);
 	al_destroy_event_queue(event_queue);
 	return 0;

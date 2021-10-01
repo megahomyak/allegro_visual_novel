@@ -55,8 +55,20 @@ const char default_font_path[] = "data/fonts/jetbrains_mono.ttf";
 
 int main() {  // Not (void) because conflicting with allegro
 	check_init(al_init(), "allegro");
-	check_init(al_install_mouse(), "mouse");
-	check_init(al_install_touch_input(), "touch input");
+
+    bool mouse_or_touch_input_was_installed_successfully = false;
+    if (al_install_mouse()) {
+        mouse_or_touch_input_was_installed_successfully = true;
+        al_register_event_source(event_queue, al_get_mouse_event_source());
+    }
+    if (al_install_touch_input()) {
+        mouse_or_touch_input_was_installed_successfully = true;
+        al_register_event_source(event_queue, al_get_touch_input_event_source());
+    }
+    if (!mouse_or_touch_input_was_installed_successfully) {
+        lightweight_print("Unable to initialize mouse or touch input!");
+        exit(1);
+    }
 
 	ALLEGRO_DISPLAY *display = make_new_allegro_display(DEFAULT_DISPLAY_WIDTH, DEFAULT_DISPLAY_HEIGHT, "Моя игра");
 	check_init(display, "display");
@@ -64,9 +76,7 @@ int main() {  // Not (void) because conflicting with allegro
 	check_init(event_queue, "event queue");
 	check_init(al_init_image_addon(), "image addon");
 
-	al_register_event_source(event_queue, al_get_mouse_event_source());
 	al_register_event_source(event_queue, al_get_display_event_source(display));
-	al_register_event_source(event_queue, al_get_touch_input_event_source());
 
 	struct GameContext game_context;
 	struct GameContext *game_context_ptr = &game_context;

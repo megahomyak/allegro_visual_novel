@@ -53,7 +53,8 @@ void handle_button_click(struct GameContext *game_context, unsigned int x, unsig
 const char default_font_path[] = "data/fonts/jetbrains_mono.ttf";
 
 
-int main() {  // Not (void) because conflicting with allegro
+int main(int argc, char **argv) {  // Not (void) because conflicting with allegro
+    UNUSED(argc); UNUSED(argv);
 	check_init(al_init(), "allegro");
 
 	ALLEGRO_DISPLAY *display = make_new_allegro_display(DEFAULT_DISPLAY_WIDTH, DEFAULT_DISPLAY_HEIGHT, "Моя игра");

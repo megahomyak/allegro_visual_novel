@@ -62,6 +62,7 @@ int main(int argc, char **argv) {  // Not (void) because conflicting with allegr
 	ALLEGRO_EVENT_QUEUE *event_queue = al_create_event_queue();
 	check_init(event_queue, "event queue");
 	check_init(al_init_image_addon(), "image addon");
+    check_init(al_init_primitives_addon(), "primitives addon");
 
     bool mouse_or_touch_input_was_installed_successfully = false;
     if (al_install_mouse()) {
@@ -90,6 +91,7 @@ int main(int argc, char **argv) {  // Not (void) because conflicting with allegr
 	game_context.indents.button_text = DEFAULT_TEXT_INDENT;
 	game_context.indents.buttons_and_image = DEFAULT_BUTTON_INDENT;
 
+    check_init(al_init_font_addon(), "font addon");
 	check_init(al_init_ttf_addon(), "ttf addon");
 	ALLEGRO_FONT *font = load_ttf_font(default_font_path, DEFAULT_FONT_SIZE);
 	set_font(game_context_ptr, font);
@@ -121,7 +123,9 @@ int main(int argc, char **argv) {  // Not (void) because conflicting with allegr
 	}
 	event_loop_end:
 	al_destroy_display(display);
+    al_shutdown_font_addon();
 	al_shutdown_ttf_addon();
+    al_shutdown_primitives_addon();
 	al_shutdown_image_addon();
 	al_destroy_font(font);
 	al_destroy_event_queue(event_queue);
